@@ -1,0 +1,16 @@
+\subsection{Dependencies}
+Usally, every project have external dependencies. Maven takes controll of it for you if you define them inside your pom.xml file.
+\begin{lstlisting}
+	<dependencies>
+	...
+		<dependency>
+			<groupId>com.group.id</groupId>
+			<artifactId>artifact-id-of-project</artifactId>
+			<version>1.29.2</version>
+		</dependency>
+	...
+	</dependencies>
+\end{lstlisting}
+Now, maven looks for a project identified by "com.group.id" and "artifact-id-of-project" with the version "1.29.2" in your local repository. If this project isn't stored there, maven will search for it in any configured and offical remote repositories. 
+
+Offical maven repository browser is available at https://mvnrepository.com/

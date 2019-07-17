@@ -1,0 +1,13 @@
+\subsection{Eclipse}
+Eclipse uses the \lstinline{m2eclipse} plugin to controll maven. You don't need to download maven if you only want to use eclipse in order to create new projects.
+Follow these steps to create a new project:
+\begin{enumerate}
+	\item File $\rightarrow$ New $\rightarrow$ Other $\rightarrow$ Maven Project
+	\item Mark “Create a simple project” if there is no special purposes (for ex. Web-project). \ToDo{ See maven archtype specification \ref{maven:archtype} <-- hochstellen}. 
+	\begin{itemize}
+		\item Set the parent informations \ref{chapter:maven_basics}
+		\item Set \lstinline{groupId} and choose an \lstinline{artifactId} - see \ref{chapter:maven_baiscs}
+	\end{itemize}
+\end{enumerate}
+
+If you already have a project and want to load it into the Eclipse UI, you can run \lstinline{mvn eclipse:eclipse} task or import it through the Eclipses Import Manager (then Eclipse will run the eclipse:eclipse task for you). See \ToDo{insert Ref to import to eclipse} 

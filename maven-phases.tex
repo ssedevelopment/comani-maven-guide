@@ -1,0 +1,21 @@
+\subsection{Phases and Goals} \label{chapter:intro:phases}
+The next big things are phases and goals. 
+The most important phases are:
+\begin{itemize} 
+	\item package: Compiles the sources and reads the <package> configuration from your pom and package it into the desired format. 
+	\item install: Does nearly the same as package but install the project in your local maven repository too.
+	\item compile: Only compiles all source files
+	\item test: Runs all test. Test classes starts with "Test" prefix or defined inside the pom.xml
+	\item deploy: Same as install but it will publish the project to a remote repository
+\end{itemize}
+You run those phases directly through maven. 
+Command-line example:
+\begin{lstlisting}
+	mvn install
+	mvn package
+	mvn test
+	mvn clean package # remove all stored jars etc.
+	mvn -f other-pom.xml install
+\end{lstlisting}
+
+A more specific introduction for starters are available at \url{https://www.baeldung.com/maven-goals-phases}

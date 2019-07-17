@@ -1,0 +1,66 @@
+\subsection{Basics for new projects} \label{chapter:maven_basics}
+Each new \thetool{}-maven project needs some basic informations:
+
+\begin{enumerate}
+	\item Parent - It provides the project specific settings like the java version and encoding to use. 
+		\begin{itemize}
+			\item Group ID: net.ssehub.comani
+			\item Artifact ID: comani-project
+			\item Version: 1.0.1 \ToDo{insert Date here}
+			\item You can just insert this block to your pom
+			\begin{lstlisting}
+<parent>
+	<groupId>net.ssehub.comani</groupId>
+	<artifactId>comani-project</artifactId>
+	<version>1.0.1</version>
+</parent>
+			\end{lstlisting}
+		\end{itemize}
+	\item Project settings
+		\begin{itemize}
+			\item Group ID: net.ssehub.comani
+			\item For the rest like artifactId and name, see apaches naming guide \footnote{\url{https://maven.apache.org/guides/mini/guide-naming-conventions.html}}
+			
+			\item \ToDo{To choose the right version, see Oracles Version Guide.} If your make a child project, it is possible to remove the groupId and the version of this project. In this case, the module will inherit those settings from the parent.
+%			\item For the version settings, see Oracles Version Guide 			\footnote{\url{https://docs.oracle.com/middleware/1212/core/MAVEN/maven_version.htm#MAVEN401}}
+		\end{itemize}
+	\item Dependencies
+	
+		Probably each \thetool{} tool has a dependency to the main infrastructure.
+		Set this dependency in the pom. 
+		\begin{lstlisting}
+<dependencies>
+...
+	<!-- Interfaces and main structure -->
+	<dependency>
+	<groupId>net.ssehub.comani</groupId>
+	<artifactId>comani-structure</artifactId>
+	<version>[1,)</version>
+	</dependency>
+...
+</dependencies>
+		\end{lstlisting}
+	\item Repository
+	
+		We store \thetool{} projects inside our custom remote repository. 
+		\begin{lstlisting}
+<repositories>
+...
+	<repository>
+		<id>mvn-repo</id>
+		<url>https://raw.githubusercontent.com/ssedevelopment/comani-mvn-repo/master</url>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+		<snapshots>
+			<enabled>true</enabled>
+		</snapshots>
+	</repository>
+...
+</repositories>
+		\end{lstlisting}
+\end{enumerate}
+
+\ToDo{
+	A full example maven pom.xml
+}

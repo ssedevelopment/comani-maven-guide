@@ -1,0 +1,40 @@
+\subsection{Aggregation (or Multi-Module)}
+A maven project (called child) can inherit any settings except the artifactId from an other maven project (called parent). The parent is not a regular project and can't be build as jar/war or anything else. The projects just provides its own pom to other projects.   
+
+Set packaging to "pom" inside the parent pom.xml:
+\begin{lstlisting}
+<groupId>net.ssehub.comani</groupId>
+<artifactId>comani-project</artifactId>
+<version>1.0.1</version>
+<packaging>pom</packaging>  <------------- is needed in order to provide settings to other projects
+\end{lstlisting}
+
+Add parent section to childs pom.xml:
+\begin{lstlisting}
+<parent>
+<groupId>net.ssehub.comani</groupId>
+<artifactId>comani-project</artifactId>
+<version>1.0.1</version>
+</parent>
+\end{lstlisting}
+
+Any defined build option or property from the parent project is now available for the child. (If nessecary, remove the groupId and version from your child pom and it will inherit those settings from its parent.)
+In case of a multi-module project, it is often requested to build all submodules at once. To archive this, create a <module> block inside (any) parent pom and execute the desired goal on it - like install or package.  
+\begin{lstlisting}
+<modules>
+ <module>TestProject</module># Will search for ./TestProject/pom.xml
+ <module>../../GitCommitExtractor</module> # will search for ../../GitCommitExtractor/pom.xml
+ <module>../../SvnCommitExtractor</module>
+</modules>
+\end{lstlisting}
+
+Additional informations:
+\begin{itemize}
+	\item We highly recommend to read \url{http://maven.apache.org/pom.html#Aggregation}
+	\item To build other maven projects (modules), it is not nessecary to be the parent of those projects
+	\item A child can be a parent again. In case of a multi-module infrastructure maven will take care of the build order to match all needed dependencies. 
+	\item The module settings are optional. A parent doesn't need to build or know its childs.
+	\item If a child project does not have an own version, it will be build with the version of the parent project. 
+	\item It make sense to create a company or project pom, which provides build settings like encoding and java version.
+\end{itemize}
+

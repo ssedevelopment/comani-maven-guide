@@ -1,0 +1,24 @@
+\subsection{Pure Maven}
+
+Pure maven means: You does not use any other tool for creating your project than maven. For this procedure, \clcommand{maven} have to be installed on your system. Typically you controll maven through command-line with the \lstinline{mvn} command.
+
+To generate a simple project use the following command to generate a new one with maven. Change the needed settings like \lstinline{groupId}, \lstinline{artifactId}.\label{maven:archtype} At least you have to choose a template identified by \lstinline{archetypeArtifactId}. There are 1000+ templates in the maven repository but the most importants are 
+\begin{itemize}
+	\item maven-archetype-webapp – Java Web Project (WAR)
+	\item maven-archetype-quickstart – Java Project (JAR)
+\end{itemize}
+
+\begin{lstlisting}
+mvn archetype:generate 
+-DgroupId={project-packaging}
+-DartifactId={project-name}
+-DarchetypeArtifactId={maven-template} 
+-DinteractiveMode=false
+
+\end{lstlisting}
+
+Or you can use the interactive mode, where maven asks for every decision:
+
+\begin{lstlisting}
+mvn archetype:generate 
+\end{lstlisting}

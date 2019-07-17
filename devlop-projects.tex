@@ -1,0 +1,42 @@
+\section{Develop existing projects}
+
+\subsection{Single Project}
+\begin{enumerate}
+	\item Clone the project with git
+	\item Import via Eclipse: Right Click $\rightarrow$ Import $\rightarrow$ Existing Maven project
+	\item Sometimes Eclipse loads the wrong JRE System Library. Maybe you need to change it in the build path.
+	\item  Build/Install the project. Right click on pom.xml $\rightarrow$ “Run as maven build”. Use your desired phase/goal like “package” or “install” and then run. All dependencies will be downloaded. For phases explanation see \ref{chapter:intro:phases}
+\end{enumerate}
+
+
+\subsection[Multiple Projects]{Workflow for developing multiple Projects}
+Imagine you want to develop all projects at the same time. Clone them all and import them into your environment like Eclipse. You can modify any project and install them into your local repository. All other projects will use the local cached version now. Keep in mind: The Local Repository is always preferred. 
+
+To have a more transparent and failsafe process you \textbf{should} work with versions and snapshots. The versioning we use is the default and recommended of maven (and git). \footnote{\url{https://semver.org/}}
+ 
+Lets assume the current project is in version 1.0.1. 
+\begin{enumerate}
+	\item Change the version of your project to 1.1.0-SNAPSHOT for example. 
+	
+	If you have submodules in your project, you can archive a fast process through mavens version phase. 
+	\begin{lstlisting}
+mvn versions:set -DnewVersion=1.1.0-SNAPSHOT
+mvn versions:commit -DprocessAllModules	
+	\end{lstlisting}
+	\item Begin developing process
+	\item Install it in your local repository. The new project is now available for other projects
+	\item Maybe you want to change the used dependency version of other project to 1.1.0-SNAPSHOT
+	
+	Example: You modify the main \thetool{} infrastructure. Then you change the used version of the used \thetool{} infrastructure version in GitCommitExtractor to the 1.1.0-SNAPSHOT. 
+	\item After you finished the process and you are ready to release the new version, remove the SNAPSHOT suffix and deploy it to the remote repository. 
+\end{enumerate}
+
+\subsection[Deploy projects]{Deploy projects to maven repository}
+If you finished your work, you should release a new version that other project can use it as dependency. Normally you deploy it directly to the set maven repository. Because we use a github repository which act (temporarily) as our maven repository, the behaviour is a little different. 
+
+
+\begin{enumerate}
+	\item Instead of deploying the project directly to a maven repo, we deploy it as "file" (this is defined inside the project pom) \ToDo{ Reference to code snippet}.
+	Run \lstinline{mvn deploy} or \lstinline{mvn -f otherpom.xml deploy} if you deploy something else. Maven generated a new directory (from your current location) at target/mvn-repo/. 
+	\item Upload the content of this directory to github. Decide on your own how to do this, but it have to be at the top level directory structure inside the github repository. Then commit and push the content to the origin (if you have contributor permissions). 
+\end{enumerate}

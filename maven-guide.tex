@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+\RequirePackage[
+a4paper, % Paper size
+inner=35mm, % Margin at the inner side of a page
+outer=25mm, % Margin at the outer side of a page
+top=25mm, % Top margin
+bottom=20mm, % Bottom margin
+headheight=14pt % Allow more space to print headers adequately
+]{geometry}
+
+% report uses chapters, article starts with sections
+% Document Setup
+\input{meta/docSettings}
+\input{meta/lstSettings}
+\input{meta/commands}
+%\input{meta/codeSettings}
+% ToDos & Comments
+\usepackage{ifthen}
+\usepackage{tasks}
+\newboolean{showToDos}
+\setboolean{showToDos}{true} % Switch for en-/dis-abling comments/ToDos
+\input{meta/todos}
+%opening
+\title{\thetool{} Setup Guide for Developers}
+\author{Marcel Spark}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+\input{maven-intro}
+\clearpage
+\input{setup-new_project}
+\clearpage
+\input{devlop-projects}
+\end{document}

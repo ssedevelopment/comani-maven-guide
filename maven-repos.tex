@@ -1,0 +1,9 @@
+\subsection{Repositories}
+Two kinds of repositories are important
+\begin{enumerate}
+	\item local repository
+	\item remote repository
+\end{enumerate}
+Every dependency or parent module which is defined inside the pom.xml file will be downloaded from a \textbf{remote} repository if it is not in your local repository. This is typically the default maven repository but you can define your own (company) repository too. New releases will publish through the \textit{deploy} phases. 
+
+The \textbf{local} repository is stored on your hard drive. It is always preferred instead of downloading something from any remote repo. After a successful download, every dependency will cached into the local repo. The \textit{install} phase will store the current project into it. 
